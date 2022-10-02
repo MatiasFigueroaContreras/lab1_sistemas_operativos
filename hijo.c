@@ -14,7 +14,8 @@
 YearData *getYearData(int initial_position, int final_position)
 {
     int column;
-    char read_game_data[100], name[25];
+    float price;
+    char read_game_data[300], name[100];
     FILE *file = fopen(INTERMEDIATE_FILE, "r");
     YearData *year_data = createYearData();
     year_data->price_cheap_game = 1000000;
@@ -24,8 +25,8 @@ YearData *getYearData(int initial_position, int final_position)
     while (ftell(file) != final_position)
     {
         column = 0;
-        fgets(read_game_data, 100, file);
-        float price = 0;
+        fgets(read_game_data, 300, file);
+        price = 0;
         char *value = strtok(read_game_data, ",");
 
         while (value)
@@ -43,12 +44,12 @@ YearData *getYearData(int initial_position, int final_position)
                     year_data->price_expensive_game = price;
                     strcpy(year_data->expensive_game, name);
                 }
-
                 if(price < year_data->price_cheap_game)
                 {
                     year_data->price_cheap_game = price;
                     strcpy(year_data->cheap_game, name);
                 }
+
                 break;
             case 2:
                 if(strcmp("True", value) == 0)
@@ -77,7 +78,6 @@ YearData *getYearData(int initial_position, int final_position)
             default:
                 break;
             }
-
             value = strtok(NULL, ",");
             column++;
         }

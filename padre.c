@@ -19,7 +19,7 @@
 int *generateIntermediateFile(char *input_file, int initial_year, float min_price)
 {
     int column, year, index, max_years = 2022 - initial_year + 1;
-    char read_game_data[100];
+    char read_game_data[400];
     FILE *read_file = fopen(input_file, "r");
     if(read_file == NULL)
     {
@@ -33,10 +33,10 @@ int *generateIntermediateFile(char *input_file, int initial_year, float min_pric
         years_data[i] = createList();
     }
     float price;
-    while (fgets(read_game_data, 100, read_file))
+    while (fgets(read_game_data, 400, read_file))
     {
         column = 0;
-        char write_game_data[100] = "";
+        char write_game_data[300] = "";
         char *value = strtok(read_game_data, ",");
         while (value)
         {
@@ -116,11 +116,11 @@ int *generateIntermediateFile(char *input_file, int initial_year, float min_pric
     Retorno:
         no posee.
 */
-void writeOutputFile(char *file_name, YearData *data)
+void writeOutputFile(char *file_name, char *data)
 {
     FILE *file = fopen(file_name, "a");
     fseek(file, 0, SEEK_END);
-    fputs(toString(data), file);
+    fputs(data, file);
     fclose(file);
 }
 
@@ -133,7 +133,20 @@ void writeOutputFile(char *file_name, YearData *data)
     Retorno:
         no posee.
 */
-void showData(YearData *data)
+void showData(char *data)
 {
-    printf("%s", toString(data));
+    printf("%s", data);
+}
+
+void usage(FILE *fp, const char *path)
+{
+    const char *basename = path + 2;
+
+    fprintf(fp, "usage: %s [OPTION]\n", basename);
+    fprintf(fp, "  -h, --help\t\t"
+                "Print this help and exit.\n");
+    fprintf(fp, "  -f, --file[=FILENAME]\t"
+                "Write all output to a file (defaults to out.txt).\n");
+    fprintf(fp, "  -m, --msg=STRING\t"
+                "Output a particular message rather than 'Hello world'.\n");
 }

@@ -3,6 +3,14 @@
 #include <stdlib.h>
 #include "informacion.h"
 
+/*
+    Descripcion: Crea una estructura YearData, con la informacion inicial
+        establecida.
+    Parametros:
+        No tiene.
+    Retorno:
+        Puntero a la estructura YearData creada.
+*/
 YearData *createYearData()
 {
     YearData *new_year_data = malloc(sizeof(YearData));
@@ -23,14 +31,13 @@ YearData *createYearData()
     Retorno:
         char*: String con los datos del año seleccionado
 */
-
 char *toString(YearData *info)
 {
     // asignacion de memoria
     char *string = malloc(sizeof(char) * 1000);
-    char *anio = malloc(sizeof(char) * 50);
-    char *precioJuegoCaro = malloc(sizeof(char) * 50);
-    char *precioJuegoBarato = malloc(sizeof(char) * 50);
+    char *year = malloc(sizeof(char) * 50);
+    char *precioJuegoCaro = malloc(sizeof(char) * 150);
+    char *precioJuegoBarato = malloc(sizeof(char) * 150);
     char *totalJuegos = malloc(sizeof(char) * 50);
     char *mean = malloc(sizeof(char) * 50);
     char *totalWindows = malloc(sizeof(char) * 50);
@@ -38,7 +45,7 @@ char *toString(YearData *info)
     char *totalLinux = malloc(sizeof(char) * 50);
 
     // conversion de datos a string
-    sprintf(anio, "%d", info->year);
+    sprintf(year, "%d", info->year);
     sprintf(precioJuegoCaro, "%.2f", info->price_expensive_game);
     sprintf(precioJuegoBarato, "%.2f", info->price_cheap_game);
     sprintf(totalJuegos, "%d", info->total_games);
@@ -49,7 +56,7 @@ char *toString(YearData *info)
     // concatenacion de datos
     strcpy(string, "");
     strcat(string, "Año: ");
-    strcat(string, "2000");
+    strcat(string, year);
     strcat(string, "\nJuego mas caro: ");
     strcat(string, info->expensive_game);
     strcat(string, " ");
@@ -71,9 +78,18 @@ char *toString(YearData *info)
     strcat(string, "  Linux: ");
     strcat(string, totalLinux);
     strcat(string, "%\n");
+    if(info->free_games->length == 0)
+    {
+        strcat(string, "No hay juegos gratis\n");
+    }
+    else{
+        strcat(string, "Juegos gratis:\n");
+    }
+
     for (Node *current = info->free_games->head; current != NULL; current = current->next)
     {
         strcat(string, current->data);
+        strcat(string, "\n");
     }
 
     return string;

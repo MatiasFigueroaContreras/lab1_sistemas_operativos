@@ -5,9 +5,9 @@
 typedef struct
 {
     int year;
-    char expensive_game[25];
+    char expensive_game[100];
     float price_expensive_game;
-    char cheap_game[25];
+    char cheap_game[100];
     float price_cheap_game;
     int total_games;
     float sum_prices;
