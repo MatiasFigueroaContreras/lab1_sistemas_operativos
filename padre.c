@@ -23,7 +23,7 @@ int *generateIntermediateFile(char *input_file, int initial_year, float min_pric
     FILE *read_file = fopen(input_file, "r");
     if(read_file == NULL)
     {
-        printf("Error, Input file doesn't exist");
+        printf("Error, Input file doesn't exist\n");
         return NULL;
     }
 
