@@ -1,5 +1,4 @@
 #include "padre.h"
-#include "linkedList.h"
 #define INTERMEDIATE_FILE "intermediate_file.txt"
 
 /*
@@ -117,12 +116,12 @@ int *generateIntermediateFile(char *input_file, int initial_year, float min_pric
     Retorno:
         no posee.
 */
-void writeOutputFile(char *file_name, YearData data)
+void writeOutputFile(char *file_name, YearData *data)
 {
     FILE *file = fopen(file_name, "a");
-    fseek(file_name, 0, SEEK_END);
-    fputs(toString(data), file_name);
-    fclose(file_name);
+    fseek(file, 0, SEEK_END);
+    fputs(toString(data), file);
+    fclose(file);
 }
 
 /*
@@ -134,7 +133,7 @@ void writeOutputFile(char *file_name, YearData data)
     Retorno:
         no posee.
 */
-void showData(YearData data)
+void showData(YearData *data)
 {
     printf("%s", toString(data));
 }

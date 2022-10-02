@@ -8,7 +8,7 @@ LinkedList *createList()
     return list;
 }
 
-Node *createNode(char data[100])
+Node *createNode(char *data)
 {
     Node *new_node = malloc(sizeof(Node));
     strcpy(new_node->data, data);
@@ -16,7 +16,7 @@ Node *createNode(char data[100])
     return new_node;
 }
 
-void insert(LinkedList *list, char data[100])
+void insert(LinkedList *list, char *data)
 {
     Node *new_node = createNode(data);
     Node *temp = list->head;

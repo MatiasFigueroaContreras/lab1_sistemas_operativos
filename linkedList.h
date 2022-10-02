@@ -1,3 +1,5 @@
+#ifndef LINKEDLIST_H
+#define LINKEDLIST_H
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -20,6 +22,7 @@ typedef struct
 
 LinkedList *createList();
 
-Node *createNode(char data[100]);
+Node *createNode(char *data);
 
-void insert(LinkedList *list, char data[100]);
+void insert(LinkedList *list, char *data);
+#endif

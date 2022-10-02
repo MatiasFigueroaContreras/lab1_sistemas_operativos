@@ -11,23 +11,23 @@
     Retorno:
         Estructura que contiene toda la informacion referente al año.
 */
-YearData getYearData(int initial_position, int final_position)
+YearData *getYearData(int initial_position, int final_position)
 {
     int column;
-    char read_game_data[100];
+    char read_game_data[100], name[25];
     FILE *file = fopen(INTERMEDIATE_FILE, "r");
-    YearData year_data;
-    year_data.price_cheap_game = 1000000;
-    year_data.price_expensive_game = -1;
+    YearData *year_data = createYearData();
+    year_data->price_cheap_game = 1000000;
+    year_data->price_expensive_game = -1;
     fseek(file, initial_position, SEEK_SET);
-    fscanf(file, "%d", &year_data.year);
-    while (ftell(file) < final_position)
+    fscanf(file, "%d\n", &year_data->year);
+    while (ftell(file) != final_position)
     {
         column = 0;
         fgets(read_game_data, 100, file);
-        char name[25] = "";
         float price = 0;
         char *value = strtok(read_game_data, ",");
+
         while (value)
         {
             switch (column)
@@ -37,50 +37,51 @@ YearData getYearData(int initial_position, int final_position)
                 break;
             case 1:
                 price = atof(value);
-                year_data.sum_prices += price;
-                if (price > year_data.price_expensive_game)
+                year_data->sum_prices += price;
+                if (price > year_data->price_expensive_game)
                 {
-                    year_data.price_expensive_game = price;
-                    year_data.expensive_game = name;
+                    year_data->price_expensive_game = price;
+                    strcpy(year_data->expensive_game, name);
                 }
 
-                if(price < year_data.price_cheap_game)
+                if(price < year_data->price_cheap_game)
                 {
-                    year_data.price_cheap_game = price;
-                    year_data.cheap_game = name;
+                    year_data->price_cheap_game = price;
+                    strcpy(year_data->cheap_game, name);
                 }
                 break;
             case 2:
                 if(strcmp("True", value) == 0)
                 {
-                    insert(year_data.free_games, name);
+                    insert(year_data->free_games, name);
                 }
                 break;
             case 3:
                 if(strcmp("Yes", value) == 0)
                 {
-                    year_data.windows_games++;
+                    year_data->windows_games++;
                 }
                 break;
             case 4:
                 if (strcmp("Yes", value) == 0)
                 {
-                    year_data.mac_games++;
+                    year_data->mac_games++;
                 }   
                 break;
             case 5:
-                if (strcmp("Yes", value) == 0)
+                if (strcmp("Yes\n", value) == 0)
                 {
-                    year_data.linux_games++;
+                    year_data->linux_games++;
                 }
                 break;
             default:
                 break;
             }
-            year_data.total_games++;
+            printf("%s\n", value);
             value = strtok(NULL, ",");
             column++;
         }
+        year_data->total_games++;
     }
 
     return year_data;
