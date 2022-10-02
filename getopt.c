@@ -74,7 +74,7 @@ int main(int argc, char *argv[])
     } else {
         fp = stdout;
     }
-
+    
     if (!fp) {
         fprintf(stderr, "Failed to open file.\n");
         return 1;
