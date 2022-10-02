@@ -39,20 +39,24 @@ char *toString(YearData *info)
 
     // conversion de datos a string
     sprintf(anio, "%d", info->year);
-    sprintf(precioJuegoCaro, "%f", info->price_expensive_game);
-    sprintf(precioJuegoBarato, "%f", info->price_cheap_game);
+    sprintf(precioJuegoCaro, "%.2f", info->price_expensive_game);
+    sprintf(precioJuegoBarato, "%.2f", info->price_cheap_game);
     sprintf(totalJuegos, "%d", info->total_games);
-    sprintf(mean, "%f", meanPrices(info));
+    sprintf(mean, "%.3f", meanPrices(info));
     sprintf(totalWindows, "%.2f", getPercentage(info->total_games, info->windows_games));
     sprintf(totalMac, "%.2f", getPercentage(info->total_games, info->mac_games));
     sprintf(totalLinux, "%.2f", getPercentage(info->total_games, info->linux_games));
     // concatenacion de datos
     strcpy(string, "");
-    strcat(string, "Year: ");
+    strcat(string, "Año: ");
     strcat(string, "2000");
     strcat(string, "\nJuego mas caro: ");
+    strcat(string, info->expensive_game);
+    strcat(string, " ");
     strcat(string, precioJuegoCaro);
     strcat(string, "\nJuego mas barato: ");
+    strcat(string, info->cheap_game);
+    strcat(string, " ");
     strcat(string, precioJuegoBarato);
     strcat(string, "\nTotal de juegos: ");
     strcat(string, totalJuegos);
