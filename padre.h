@@ -9,4 +9,3 @@ void writeOutputFile(char *file_name, char *data);
 
 void showData(char *data);
 
-void usage(FILE *fp, const char *path);

@@ -138,15 +138,3 @@ void showData(char *data)
     printf("%s", data);
 }
 
-void usage(FILE *fp, const char *path)
-{
-    const char *basename = path + 2;
-
-    fprintf(fp, "usage: %s [OPTION]\n", basename);
-    fprintf(fp, "  -h, --help\t\t"
-                "Print this help and exit.\n");
-    fprintf(fp, "  -f, --file[=FILENAME]\t"
-                "Write all output to a file (defaults to out.txt).\n");
-    fprintf(fp, "  -m, --msg=STRING\t"
-                "Output a particular message rather than 'Hello world'.\n");
-}

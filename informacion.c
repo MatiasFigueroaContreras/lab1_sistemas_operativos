@@ -36,9 +36,9 @@ char *toString(YearData *info)
     // asignacion de memoria
     char *string = malloc(sizeof(char) * 1000);
     char *year = malloc(sizeof(char) * 50);
-    char *precioJuegoCaro = malloc(sizeof(char) * 150);
-    char *precioJuegoBarato = malloc(sizeof(char) * 150);
-    char *totalJuegos = malloc(sizeof(char) * 50);
+    char *price_expensive_game = malloc(sizeof(char) * 150);
+    char *price_cheap_game = malloc(sizeof(char) * 150);
+    char *total_games = malloc(sizeof(char) * 50);
     char *mean = malloc(sizeof(char) * 50);
     char *totalWindows = malloc(sizeof(char) * 50);
     char *totalMac = malloc(sizeof(char) * 50);
@@ -46,9 +46,9 @@ char *toString(YearData *info)
 
     // conversion de datos a string
     sprintf(year, "%d", info->year);
-    sprintf(precioJuegoCaro, "%.2f", info->price_expensive_game);
-    sprintf(precioJuegoBarato, "%.2f", info->price_cheap_game);
-    sprintf(totalJuegos, "%d", info->total_games);
+    sprintf(price_expensive_game, "%.2f", info->price_expensive_game);
+    sprintf(price_cheap_game, "%.2f", info->price_cheap_game);
+    sprintf(total_games, "%d", info->total_games);
     sprintf(mean, "%.3f", meanPrices(info));
     sprintf(totalWindows, "%.2f", getPercentage(info->total_games, info->windows_games));
     sprintf(totalMac, "%.2f", getPercentage(info->total_games, info->mac_games));
@@ -60,13 +60,13 @@ char *toString(YearData *info)
     strcat(string, "\nJuego mas caro: ");
     strcat(string, info->expensive_game);
     strcat(string, " ");
-    strcat(string, precioJuegoCaro);
+    strcat(string, price_expensive_game);
     strcat(string, "\nJuego mas barato: ");
     strcat(string, info->cheap_game);
     strcat(string, " ");
-    strcat(string, precioJuegoBarato);
+    strcat(string, price_cheap_game);
     strcat(string, "\nTotal de juegos: ");
-    strcat(string, totalJuegos);
+    strcat(string, total_games);
     strcat(string, "\nPromedio de precios: ");
     strcat(string, mean);
     strcat(string, "\nWindows: ");

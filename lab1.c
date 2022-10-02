@@ -4,14 +4,43 @@
 #include <unistd.h>
 #include <getopt.h>
 
+void usage(FILE *fp, const char *path)
+{
+    const char *basename = path + 2;
+    fprintf(fp, "usage: %s [OPTION]\n", basename);
+    fprintf(fp, "The following is the correct format for using the program:\t\t"
+                "\n'./lab1 -i input_file -o output_file -d year -p price -b'\n");
+    fprintf(fp, "  -h, --help\t\t"
+                "Print this help and exit.\n");
+    fprintf(fp, "  -i, --input[=INPUTFILENAME]\t"
+                "Write all output to a file (defaults to out.txt).\n");
+    fprintf(fp, "  -o, --output[=OUTPUTFILENAME]\t");
+    fprintf(fp,"-d, year required to start the search.\n");
+    fprintf(fp, "  -m, --min[=MINPRICE]\t"
+                "Minimum price required to start the search.\n");
+    fprintf(fp, "-b, print the data in the console.\n");
+}
+
+
 int main(int argc, char *argv[])
 {
     int print_flag = 0;
+    int help_flag = 0;
     int opt, year = -1;
     float min_price = -1;
     char input_file[100], output_file[100];
 
-    while ((opt = getopt(argc, argv, ":i:o:d:p:b::h")) != -1)
+    struct option longopts[]=
+{   {"help", no_argument, &help_flag, 1},
+    {"input", required_argument, NULL, 'i'},
+    {"output", optional_argument, NULL, 'o'},
+    {"year", required_argument, NULL, 'd'},
+    {"min_price", required_argument, NULL, 'p'},
+    {"print_flag", no_argument, NULL, 'b'},
+    {0, 0, 0, 0}
+};
+
+    while ((opt = getopt_long(argc, argv, ":i:o:d:p:b::h",longopts,0)) != -1)
     {
         switch (opt)
         {
@@ -29,11 +58,14 @@ int main(int argc, char *argv[])
         case 'b':
             print_flag = 1;
             break;
+        case 'h':
+            usage(stdout, argv[0]);
+            exit(EXIT_SUCCESS);
         case '?': // flag que no existe
-            printf("Error, Flag doesn't exist\n");
+            usage(stderr, argv[0]);
             return 1;
         case ':': // cuando se usa mal una flag
-            printf("Error, Flag require argument\n");
+            usage(stderr, argv[0]);
             return 1;
         default: // se aborta cuando falta flag o argumento obligatorio
             abort();
@@ -43,7 +75,7 @@ int main(int argc, char *argv[])
 
     if(input_file == NULL || output_file == NULL || year < 0 || min_price < 0)
     {
-        printf("Error, flags required.\n");
+    usage(stderr, argv[0]);
         return 0;
     }
 
