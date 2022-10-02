@@ -15,7 +15,15 @@ YearData *createYearData()
     return new_year_data;
 }
 
-// total del archivo a recabar informacion
+/*
+    Descripcion: Transforma los datos del año seleccionado en un string
+    
+    Parametros:
+        YearData: Estructura con los datos del año seleccionado
+    Retorno:
+        char*: String con los datos del año seleccionado
+*/
+
 char *toString(YearData *info)
 {
     // asignacion de memoria
@@ -35,9 +43,9 @@ char *toString(YearData *info)
     sprintf(precioJuegoBarato, "%f", info->price_cheap_game);
     sprintf(totalJuegos, "%d", info->total_games);
     sprintf(mean, "%f", meanPrices(info));
-    sprintf(totalWindows, "%f", getPercentage(info->total_games, info->windows_games));
-    sprintf(totalMac, "%f", getPercentage(info->total_games, info->mac_games));
-    sprintf(totalLinux, "%f", getPercentage(info->total_games, info->linux_games));
+    sprintf(totalWindows, "%.2f", getPercentage(info->total_games, info->windows_games));
+    sprintf(totalMac, "%.2f", getPercentage(info->total_games, info->mac_games));
+    sprintf(totalLinux, "%.2f", getPercentage(info->total_games, info->linux_games));
     // concatenacion de datos
     strcpy(string, "");
     strcat(string, "Year: ");
@@ -67,6 +75,14 @@ char *toString(YearData *info)
     return string;
 }
 
+/*
+    Descripcion: Calcula el promedio de precios de los juegos del año seleccionado
+    
+    Parametros:
+        YearData: Estructura con los datos del año seleccionado
+    Retorno:
+        float: Promedio de precios de los juegos del año seleccionado
+*/
 float meanPrices(YearData *info)
 {
     float total = info->total_games;
@@ -75,6 +91,15 @@ float meanPrices(YearData *info)
     return mean;
 }
 
+/*
+    Descripcion: Calcula el porcentaje de juegos de una plataforma en especifico
+    
+    Parametros:
+        int total_games: Total de juegos del año seleccionado
+        int plataform_games: Total de juegos de una plataforma en especifico
+    Retorno:
+        float: Porcentaje de juegos de una plataforma en especifico
+*/
 float getPercentage(int total_games, int plataform_games)
 {
     return (plataform_games / (float)total_games )* 100;
