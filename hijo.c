@@ -69,7 +69,7 @@ YearData *getYearData(int initial_position, int final_position)
                 }   
                 break;
             case 5:
-                if (strcmp("Yes\n", value) == 0)
+                if (value[0] == 'Y')
                 {
                     year_data->linux_games++;
                 }
@@ -77,7 +77,7 @@ YearData *getYearData(int initial_position, int final_position)
             default:
                 break;
             }
-            printf("%s\n", value);
+
             value = strtok(NULL, ",");
             column++;
         }
