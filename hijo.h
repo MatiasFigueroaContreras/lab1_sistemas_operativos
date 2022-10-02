@@ -1,3 +1,3 @@
 #include "informacion.h"
 
-data getData(int intial_position, int final_position);
+YearData getYearData(int initial_position, int final_position);

@@ -1,9 +1,10 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "informacion.h"
 
-int generateIntermediateFile(char *input_file, int initial_year);
+int *generateIntermediateFile(char *input_file, int initial_year, float min_price);
 
-int *getPositions();
+void writeOutputFile(char *file_name, YearData data);
 
-void writeOutputFile(char *file_name, data data);
-
-void showData(data data);
+void showData(YearData data);

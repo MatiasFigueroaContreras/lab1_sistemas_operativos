@@ -1,19 +1,22 @@
-typedef struct
-{   int year;
+#include "linkedList.h"
+
+typedef struct 
+{
+    int year;
     char *expensive_game;
-    char *cheap_game;
     float price_expensive_game;
+    char *cheap_game;
     float price_cheap_game;
     int total_games;
     float sum_prices;
     int windows_games;
     int mac_games;
     int linux_games;
-    // Juegos gratis
-}data;
+    LinkedList *free_games;
+} YearData;
 
-char *toString(data info);
+char *toString(YearData data);
 
-float meanPrices(data info);
+int meanPrices(YearData data);
 
 float getPercentage(int total_games, int plataform_games);
