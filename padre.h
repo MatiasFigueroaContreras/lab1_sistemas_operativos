@@ -8,4 +8,3 @@ int *generateIntermediateFile(char *input_file, int initial_year, float min_pric
 void writeOutputFile(char *file_name, char *data);
 
 void showData(char *data);
-

@@ -25,7 +25,7 @@ YearData *createYearData()
 
 /*
     Descripcion: Transforma los datos del año seleccionado en un string
-    
+
     Parametros:
         YearData: Estructura con los datos del año seleccionado
     Retorno:
@@ -78,11 +78,12 @@ char *toString(YearData *info)
     strcat(string, "  Linux: ");
     strcat(string, totalLinux);
     strcat(string, "%\n");
-    if(info->free_games->length == 0)
+    if (info->free_games->length == 0)
     {
         strcat(string, "No hay juegos gratis\n");
     }
-    else{
+    else
+    {
         strcat(string, "Juegos gratis:\n");
     }
 
@@ -97,7 +98,7 @@ char *toString(YearData *info)
 
 /*
     Descripcion: Calcula el promedio de precios de los juegos del año seleccionado
-    
+
     Parametros:
         YearData: Estructura con los datos del año seleccionado
     Retorno:
@@ -113,7 +114,7 @@ float meanPrices(YearData *info)
 
 /*
     Descripcion: Calcula el porcentaje de juegos de una plataforma en especifico
-    
+
     Parametros:
         int total_games: Total de juegos del año seleccionado
         int plataform_games: Total de juegos de una plataforma en especifico
@@ -122,5 +123,5 @@ float meanPrices(YearData *info)
 */
 float getPercentage(int total_games, int plataform_games)
 {
-    return (plataform_games / (float)total_games )* 100;
+    return (plataform_games / (float)total_games) * 100;
 }

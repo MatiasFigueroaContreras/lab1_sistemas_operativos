@@ -21,14 +21,14 @@ int *generateIntermediateFile(char *input_file, int initial_year, float min_pric
     int column, year, index, max_years = 2022 - initial_year + 1;
     char read_game_data[400];
     FILE *read_file = fopen(input_file, "r");
-    if(read_file == NULL)
+    if (read_file == NULL)
     {
-        printf("Error, Input file doesn't exist\n");
+        printf("Error: Input file doesn't exist.\n");
         return NULL;
     }
 
     LinkedList *years_data[max_years];
-    for(int i = 0; i < max_years; i++)
+    for (int i = 0; i < max_years; i++)
     {
         years_data[i] = createList();
     }
@@ -40,20 +40,20 @@ int *generateIntermediateFile(char *input_file, int initial_year, float min_pric
         char *value = strtok(read_game_data, ",");
         while (value)
         {
-            if(column != 0 && column != 2 && column != 4)
+            if (column != 0 && column != 2 && column != 4)
             {
-                //No se agregan los valores que no seran utilizados de
-                // la informacion del juego.
-                if(column == 3)
+                // No se agregan los valores que no seran utilizados de
+                //  la informacion del juego.
+                if (column == 3)
                 {
                     price = atof(value);
                 }
 
-                if(column == 5)
+                if (column == 5)
                 {
                     year = atoi(value);
                 }
-                else if(column != 1)
+                else if (column != 1)
                 {
                     strcat(write_game_data, ",");
                     strcat(write_game_data, value);
@@ -62,13 +62,12 @@ int *generateIntermediateFile(char *input_file, int initial_year, float min_pric
                 {
                     strcat(write_game_data, value);
                 }
-
             }
             value = strtok(NULL, ",");
             column++;
         }
 
-        if(initial_year <= year && min_price <= price)
+        if (initial_year <= year && min_price <= price)
         {
             index = year % max_years;
             insert(years_data[index], write_game_data);
@@ -80,10 +79,10 @@ int *generateIntermediateFile(char *input_file, int initial_year, float min_pric
     FILE *write_file = fopen(INTERMEDIATE_FILE, "w");
     int num_years = 0, pos[max_years];
 
-    for(int y = initial_year; y <= 2022; y++)
+    for (int y = initial_year; y <= 2022; y++)
     {
         index = y % max_years;
-        if(years_data[index]->length != 0)
+        if (years_data[index]->length != 0)
         {
             pos[num_years] = ftell(write_file);
             num_years++;
@@ -96,11 +95,11 @@ int *generateIntermediateFile(char *input_file, int initial_year, float min_pric
     }
     pos[num_years] = ftell(write_file);
     fclose(write_file);
-    int *file_positions = malloc(sizeof(int)*(num_years+1));
+    int *file_positions = malloc(sizeof(int) * (num_years + 1));
     file_positions[0] = num_years;
-    for(int i = 1; i <= num_years; i++)
+    for (int i = 1; i <= num_years; i++)
     {
-        file_positions[i] = pos[i-1];
+        file_positions[i] = pos[i - 1];
     }
     return file_positions;
 }
@@ -110,7 +109,7 @@ int *generateIntermediateFile(char *input_file, int initial_year, float min_pric
         obtenida de un año especifico, esto lo hace al final del
         archivo.
     Parametros:
-        -file_name: nombre del archivo de salida. 
+        -file_name: nombre del archivo de salida.
         -data: informacion del año especifico a ser
             escrita en el archivo.
     Retorno:
@@ -137,4 +136,3 @@ void showData(char *data)
 {
     printf("%s", data);
 }
-

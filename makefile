@@ -1,6 +1,6 @@
 FLAGS = -g -Wall
 
-all: clean lab1 run
+all: clean lab1
 
 lab1: lab1.c padre.o hijo.o linkedList.o informacion.o
 	gcc $(FLAGS) -o lab1 padre.o hijo.o linkedList.o informacion.o lab1.c
@@ -19,6 +19,3 @@ informacion.o: informacion.c informacion.h
 
 clean:
 	rm -f lab1 *.o
-
-run:
-	./lab1

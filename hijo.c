@@ -44,7 +44,7 @@ YearData *getYearData(int initial_position, int final_position)
                     year_data->price_expensive_game = price;
                     strcpy(year_data->expensive_game, name);
                 }
-                if(price < year_data->price_cheap_game)
+                if (price < year_data->price_cheap_game)
                 {
                     year_data->price_cheap_game = price;
                     strcpy(year_data->cheap_game, name);
@@ -52,13 +52,13 @@ YearData *getYearData(int initial_position, int final_position)
 
                 break;
             case 2:
-                if(strcmp("True", value) == 0)
+                if (strcmp("True", value) == 0)
                 {
                     insert(year_data->free_games, name);
                 }
                 break;
             case 3:
-                if(strcmp("Yes", value) == 0)
+                if (strcmp("Yes", value) == 0)
                 {
                     year_data->windows_games++;
                 }
@@ -67,7 +67,7 @@ YearData *getYearData(int initial_position, int final_position)
                 if (strcmp("Yes", value) == 0)
                 {
                     year_data->mac_games++;
-                }   
+                }
                 break;
             case 5:
                 if (value[0] == 'Y')
